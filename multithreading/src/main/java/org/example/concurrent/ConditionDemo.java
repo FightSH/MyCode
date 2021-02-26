@@ -1,4 +1,4 @@
-package org.example.aqs;
+package org.example.concurrent;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;

@@ -1,4 +1,4 @@
-package org.example.aqs;
+package org.example.concurrent;
 
 public class WaitExercise {
 
