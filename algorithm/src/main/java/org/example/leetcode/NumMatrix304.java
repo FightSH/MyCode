@@ -7,6 +7,7 @@ package org.example.leetcode;
  *
  * 1.考虑对应矩阵下标的前缀和
  * 2.考虑指定范围内的和如何由前缀和得来
+ * 3.具体下标需要仔细考虑
  *
  */
 public class NumMatrix304 {
