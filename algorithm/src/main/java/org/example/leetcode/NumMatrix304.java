@@ -2,13 +2,12 @@ package org.example.leetcode;
 
 /**
  * 前缀和求解
- *
+ * <p>
  * 类似阴影面积求和
- *
+ * <p>
  * 1.考虑对应矩阵下标的前缀和
  * 2.考虑指定范围内的和如何由前缀和得来
  * 3.具体下标需要仔细考虑
- *
  */
 public class NumMatrix304 {
 
@@ -33,7 +32,7 @@ public class NumMatrix304 {
 
     public int sumRegion(int row1, int col1, int row2, int col2) {
 
-        return sums[row2 + 1][col2 + 1] - sums[row1][col2 + 1] - sums[row2][col1 + 1] + sums[row1][col1];
+        return sums[row2 + 1][col2 + 1] - sums[row1][col2 + 1] - sums[row2 + 1][col1] + sums[row1][col1];
 
     }
 
