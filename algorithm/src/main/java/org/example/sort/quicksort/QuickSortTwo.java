@@ -7,7 +7,7 @@ public class QuickSortTwo {
 
     public static void main(String[] args) {
         int[] ints = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
-        QuickSortOne quickSort = new QuickSortOne();
+        QuickSortTwo quickSort = new QuickSortTwo();
         int[] array = quickSort.sortArray(ints);
         System.out.println(Arrays.toString(array));
     }
@@ -18,8 +18,6 @@ public class QuickSortTwo {
     }
 
     private void quickSort(int[] nums, int left, int right) {
-
-
         if (left < right) {
             int index = partition(nums, left, right);
             quickSort(nums, left, index - 1);
@@ -30,30 +28,37 @@ public class QuickSortTwo {
     }
 
     private int partition(int[] nums, int left, int right) {
-        int num = nums[left];
+
+        final int num = nums[left];
+
         int start = left;
 
         while (left < right) {
 
-            while (left < right && nums[left] <= num) {
+            while (left < right && num <= nums[right]) {
+                right--;
+            }
+
+            while (left < right && num >= nums[left]) {
                 left++;
             }
-            while (left < right && nums[right] >= num) {
-                right++;
-            }
+
             if (left >= right) {
                 break;
             }
+
+            //swap
             int temp = nums[left];
-            nums[left]=nums[right];
+            nums[left] = nums[right];
             nums[right] = temp;
 
         }
+
         int temp = nums[start];
-        nums[left]=nums[start];
-        nums[start] = temp;
+        nums[start] = nums[left];
+        nums[left] = temp;
 
+        return left;
 
-        return right;
     }
 }

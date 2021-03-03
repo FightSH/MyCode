@@ -21,35 +21,42 @@ public class QuickSortOne {
     }
 
     private void quickSort(int[] nums, int left, int right) {
-
         if (left < right) {
+
             int index = partition(nums, left, right);
             quickSort(nums, left, index - 1);
             quickSort(nums, index + 1, right);
+
         }
+
 
     }
 
     private int partition(int[] nums, int left, int right) {
-        int num = nums[left];
+        final int num = nums[left];
+
         while (left < right) {
+
+
+
             while (left < right && nums[right] >= num) {
                 right--;
             }
-            if (left < right) {
-                nums[left] = nums[right];
-            }
+
+            nums[left] = nums[right];
+
 
             while (left < right && nums[left] <= num) {
                 left++;
             }
 
-            if (left < right) {
-                nums[right] = nums[left];
-            }
+            nums[right] = nums[left];
+
         }
-        nums[right] = num;
-        return right;
+        nums[left] = num;
+
+        return left;
+
     }
 
 

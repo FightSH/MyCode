@@ -13,8 +13,9 @@ public class MergeSortOne {
     }
 
     private static void mergeSort(int[] arrays, int left, int right) {
+
         if (left < right) {
-            int mid = left + ((right - left) >> 1);
+            int mid = left + (right - left) / 2;
             mergeSort(arrays, left, mid);
             mergeSort(arrays, mid + 1, right);
             merge(arrays, left, mid, right);
@@ -22,27 +23,30 @@ public class MergeSortOne {
     }
 
     private static void merge(int[] arrays, int left, int mid, int right) {
-        int[] tempArr = new int[right - left + 1];
+        final int[] ints = new int[right - left + 1];
         int temp1 = left;
         int temp2 = mid + 1;
         int index = 0;
 
         while (temp1 <= mid && temp2 <= right) {
-            if (arrays[temp1] > arrays[temp2]) {
-                tempArr[index++] = arrays[temp2++];
+            if (arrays[temp1] >= arrays[temp2]) {
+                ints[index++] = arrays[temp2++];
             } else {
-                tempArr[index++] = arrays[temp1++];
+                ints[index++] = arrays[temp1++];
             }
         }
+
         while (temp1 <= mid) {
-            tempArr[index++] = arrays[temp1++];
+            ints[index++] = arrays[temp1++];
         }
         while (temp2 <= right) {
-            tempArr[index++] = arrays[temp2++];
+            ints[index++] = arrays[temp2++];
         }
 
 
-        System.arraycopy(tempArr,0,arrays,left,tempArr.length);
+        System.arraycopy(ints,0,arrays,left,ints.length);
+
+
 
     }
 
