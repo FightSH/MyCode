@@ -1,7 +1,7 @@
 package org.example.singleton;
 
 public class Singleton {
-    private static Singleton singleton;
+    private static volatile Singleton singleton;
 
     private Singleton() {
     }
