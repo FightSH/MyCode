@@ -14,6 +14,13 @@ public class TreeNode {
         val = x;
     }
 
+
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+
     //前序遍历 根节点——>左子树——>右子树
     public static void preOrder(TreeNode tree) {
         if (tree == null) {
