@@ -13,6 +13,7 @@
         <module>designpattern</module>
         <module>nio</module>
         <module>multithreading</module>
+        <module>utils</module>
     </modules>
 
     <build>
