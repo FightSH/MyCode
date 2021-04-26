@@ -9,7 +9,7 @@ public class ShipWithinDays1011 {
 
 
     public static int shipWithinDays(int[] weights, int D) {
-       
+
 
         int left = Arrays.stream(weights).max().getAsInt();
         int right = Arrays.stream(weights).sum();
