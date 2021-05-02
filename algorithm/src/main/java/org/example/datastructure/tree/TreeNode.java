@@ -10,6 +10,9 @@ public class TreeNode {
 
     public int val;
 
+    //以该节点为根的子树中的节点总数
+    private int N;
+
     public TreeNode(int x) {
         val = x;
     }
