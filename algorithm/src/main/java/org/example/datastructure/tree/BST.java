@@ -123,4 +123,48 @@ public class BST<Key extends Comparable<Key>,Value> {
         }
     }
 
+
+    //删除最小元素
+    public void deleteMin() {
+        root = deleteMin(root);
+    }
+
+    private Node deleteMin(Node node) {
+        if (node.left == null) {
+            return node.right;
+        }
+        node.left = deleteMin(node.left);
+        node.N = size(node.left) + size(node.right) + 1;
+        return node;
+    }
+
+    public void delete(Key key) {
+        root = delete(root, key);
+    }
+
+    private Node delete(Node node, Key key) {
+        if (node == null) {
+            return null;
+        }
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = delete(node.left, key);
+        } else if (cmp > 0) {
+            node.right = delete(node.right, key);
+        }else {
+            if (node.right == null) {
+                return node.left;
+            }
+            if (node.left == null) {
+                return node.right;
+            }
+            Node t = node;
+            node = min(t.right);
+            node.right = deleteMin(t.right);
+            node.left = t.left;
+        }
+        node.N = size(node.left) + size(node.right) + 1;
+        return node;
+    }
+
 }
