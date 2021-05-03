@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Calculate227 {
 
-    private static   Map<Character, Integer> map = new HashMap<>() {{
+    private static Map<Character, Integer> map = new HashMap<Character, Integer>() {{
         put('-', 1);
         put('+', 1);
         put('*', 2);

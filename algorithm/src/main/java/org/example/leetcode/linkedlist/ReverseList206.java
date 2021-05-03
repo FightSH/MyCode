@@ -1,7 +1,5 @@
 package org.example.leetcode.linkedlist;
 
-import java.awt.desktop.AppReopenedEvent;
-
 public class ReverseList206 {
 
     public static void main(String[] args) {
