@@ -1,4 +1,4 @@
-package org.example.concurrent;
+package org.example.aqs;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

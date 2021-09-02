@@ -1,4 +1,4 @@
-package org.example.concurrent;
+package org.example.aqs;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

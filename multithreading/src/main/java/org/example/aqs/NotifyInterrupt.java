@@ -1,4 +1,4 @@
-package org.example.concurrent;
+package org.example.aqs;
 
 public class NotifyInterrupt {
     volatile int a = 0;
