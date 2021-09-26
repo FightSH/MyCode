@@ -7,6 +7,15 @@ import java.util.function.BiFunction;
 public class Demo {
 
 
+    public static void delay() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 //        sort();
 //        exceptionHandle();
