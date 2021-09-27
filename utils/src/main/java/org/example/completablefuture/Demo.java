@@ -1,5 +1,6 @@
 package org.example.completablefuture;
 
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
@@ -15,6 +16,15 @@ public class Demo {
         }
     }
 
+    public static void randomDelay() {
+        int delay = new Random().nextInt(2000) + 500;
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 //        sort();
@@ -38,6 +48,7 @@ public class Demo {
 
     /**
      * 任务有序处理
+     *
      * @throws ExecutionException
      * @throws InterruptedException
      */
@@ -80,8 +91,8 @@ public class Demo {
 
         //使用exceptionally方法处理异常
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
-            throw new RuntimeException();
-        })
+                    throw new RuntimeException();
+                })
                 .exceptionally(ex -> "errorResultA")
                 .thenApply(resultA -> resultA + " resultB")
                 .thenApply(resultB -> resultB + " resultC")
@@ -122,10 +133,12 @@ public class Demo {
         CompletableFuture<String> cfB = CompletableFuture.supplyAsync(() -> "resultB");
 
         //thenAcceptBoth表示后续处理不需要返回值
-        cfA.thenAcceptBoth(cfB, (resultA, resultB) -> {});
+        cfA.thenAcceptBoth(cfB, (resultA, resultB) -> {
+        });
         //thenCombine 表示需要返回值
         cfA.thenCombine(cfB, (resultA, resultB) -> "result A + B");
-        cfA.runAfterBoth(cfB, () -> {});
+        cfA.runAfterBoth(cfB, () -> {
+        });
 
     }
 
@@ -225,16 +238,16 @@ public class Demo {
     }
 
     public static void composeAndApply() {
-     //
-     //     public <U> CompletableFuture<U> thenApply(
-     //         Function<? super T,? extends U> fn) {
-     //         return uniApplyStage(null, fn);
-     //     }
-     //     public <U> CompletableFuture<U> thenCompose(
-     //         Function<? super T, ? extends CompletionStage<U>> fn) {
-     //         return uniComposeStage(null, fn);
-     //     }
-     //
+        //
+        //     public <U> CompletableFuture<U> thenApply(
+        //         Function<? super T,? extends U> fn) {
+        //         return uniApplyStage(null, fn);
+        //     }
+        //     public <U> CompletableFuture<U> thenCompose(
+        //         Function<? super T, ? extends CompletionStage<U>> fn) {
+        //         return uniComposeStage(null, fn);
+        //     }
+        //
         CompletableFuture<String> future1 = CompletableFuture
                 .supplyAsync(() -> "hello")
                 .thenApply(cfA -> cfA + " world");
