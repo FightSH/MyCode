@@ -12,7 +12,7 @@ public class ConditionDemo {
 
     final Object[] items = new Object[100];
 
-    int put, take, count=0;
+    int put, take, count = 0;
 
     public void produce(Object x) throws InterruptedException {
         lock.lock();

@@ -38,7 +38,7 @@ public class WaitNotify {
                     try {
                         Thread.sleep(3000);
                         System.out.println("线程2 休息完啦。注意了，调sleep方法和wait方法不一样，不会释放监视器锁");
-                    } catch (InterruptedException e) {
+                    } catch (InterruptedException ignored) {
 
                     }
                     System.out.println("线程2 休息够了，结束操作");
