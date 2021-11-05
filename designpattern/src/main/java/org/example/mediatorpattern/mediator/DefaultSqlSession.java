@@ -63,7 +63,7 @@ public class DefaultSqlSession implements SqlSession {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
             while (resultSet.next()) {
-                T obj = (T) clazz.newInstance();
+                T obj = (T) clazz.getDeclaredConstructor().newInstance();
                 for (int i = 1; i < columnCount; i++) {
                     Object value = resultSet.getObject(i);
                     String columnName = metaData.getColumnName(i);
