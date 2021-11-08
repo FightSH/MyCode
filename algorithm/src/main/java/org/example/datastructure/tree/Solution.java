@@ -7,7 +7,7 @@ import java.util.List;
  * @author SH
  * @date 2021/6/29 9:59
  */
-public class Soulution {
+public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
 
         List<Integer> list = new ArrayList();
