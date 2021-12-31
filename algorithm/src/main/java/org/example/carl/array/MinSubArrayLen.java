@@ -62,6 +62,7 @@ public class MinSubArrayLen {
                 sum -= nums[left++]; // 根据子序列和大小的情况，不断调节子序列的其实位置
             }
         }
+        // 注意时间复杂度为O(n), 这里主要看每一个元素被操作的次数，每个元素在滑动窗口后进来操作一次，出去操作一次，每个元素都是被操作两次，所以时间复杂度为O(n)
         return res == Integer.MAX_VALUE ? 0 : res;
     }
 }
