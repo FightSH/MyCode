@@ -2,7 +2,7 @@ package org.example.carl.array;
 
 import java.util.Arrays;
 
-public class MinSubArrayLen {
+public class MinSubArrayLen209 {
     public static void main(String[] args) {
         int[] nums = {2, 3, 1, 2, 4, 3};
         System.out.println(minSubArrayLenOne(nums, 7));
