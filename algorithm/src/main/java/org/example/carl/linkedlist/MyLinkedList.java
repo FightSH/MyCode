@@ -1,77 +1,81 @@
 package org.example.carl.linkedlist;
 
+import java.util.LinkedList;
+
 public class MyLinkedList {
-    int val;
-    MyLinkedList next;
-    int length ;
+    int length = 0;
+
+    Node first;
+
+    static class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
+        }
+    }
+
 
     // 获取链表中第 index 个节点的值。如果索引无效，则返回-1。
     public int get(int index) {
-        if (index > length || index < 0) {
+        if (index < 0 || index > length - 1) {
             return -1;
         }
-        MyLinkedList node = this;
+        Node node = first;
         for (int i = 0; i < index; i++) {
             node = node.next;
         }
-
         return node.val;
+
     }
 
     // 在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。
     public void addAtHead(int val) {
-        if (length == 0) {
-            this.val = val;
-            length = 1;
-        } else {
-            // 交换两节点位置
-
-
-            MyLinkedList node = new MyLinkedList();
-            node.val = val;
-            node.next = this;
-            length++;
-
+        Node node = new Node(val);
+        if (length != 0) {
+            node.next = first;
         }
+        first = node;
+
+        length++;
     }
 
     //
     public void addAtTail(int val) {
-        MyLinkedList node = this;
-        while (node.next != null) {
-            node = node.next;
+        Node node = new Node(val);
+        node.val = val;
+        if (length == 0) {
+            first = node;
+        } else {
+            Node cur = first;
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+            cur.next = node;
         }
-        MyLinkedList tail = new MyLinkedList();
-        tail.addAtIndex(0, val);
-        node.next = tail;
         length++;
     }
 
     public void addAtIndex(int index, int val) {
-        // 第0个节点
+        if (index < 0 || index > length ) {
+            return;
+        }
 
-        MyLinkedList dumpy = new MyLinkedList();
-        dumpy.next = this;
-        MyLinkedList cur = dumpy;
-
-        if (index < 0) {
-            this.val = val;
-        } else if (index == 0) {
+        if (index == 0) {
             addAtHead(val);
         } else if (index == length) {
-            addAtHead(val);
-        } else if (index > length) {
-
+            addAtTail(val);
         } else {
-
-            for (int i = 0; i < index; i++) {
+            Node node = new Node(val);
+            Node cur = first;
+            for (int i = 0; i < index - 1; i++) {
                 cur = cur.next;
             }
-            MyLinkedList node = new MyLinkedList();
-            node.val = val;
-            MyLinkedList next = cur.next;
+            Node temp = cur.next;
             cur.next = node;
-            node.next = next;
+            node.next = temp;
+
             length++;
         }
 
@@ -79,29 +83,31 @@ public class MyLinkedList {
     }
 
     public void deleteAtIndex(int index) {
-
-        if (index > length || index < 0) {
-
-        } else {
-
-            MyLinkedList dumpy = new MyLinkedList();
-            dumpy.next = this;
-            MyLinkedList cur = dumpy;
-            for (int i = 0; i < index; i++) {
-                cur = cur.next;
-            }
-            cur.next = cur.next.next;
-            length--;
-
-
+        if (index < 0 || index > length - 1) {
+            return;
         }
+        length--;
+        if (index == 0) {
+            first = first.next;
+
+            return;
+        }
+
+
+        Node cur = first;
+        for (int i = 0; i < index - 1; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+
+
     }
 
     void print() {
-        MyLinkedList listNode = this;
-        while (listNode != null) {
-            System.out.println(listNode.val);
-            listNode = listNode.next;
+        Node node = this.first;
+        while (node != null) {
+            System.out.println(node.val);
+            node = node.next;
         }
     }
 
@@ -113,8 +119,9 @@ public class MyLinkedList {
         linkedList.addAtIndex(3, 0);
         linkedList.deleteAtIndex(2);
         linkedList.addAtHead(6);
+
         linkedList.addAtTail(4);
-        linkedList.get(4);
+        System.out.println(linkedList.get(4));
         linkedList.addAtHead(4);
         linkedList.addAtIndex(5, 0);
         linkedList.addAtHead(6);
