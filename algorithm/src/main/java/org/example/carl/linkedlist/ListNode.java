@@ -19,7 +19,7 @@ public class ListNode {
     void print() {
         ListNode listNode = this;
         while (listNode != null) {
-            System.out.println(listNode.val);
+            System.out.print(listNode.val + " ");
             listNode = listNode.next;
         }
     }
