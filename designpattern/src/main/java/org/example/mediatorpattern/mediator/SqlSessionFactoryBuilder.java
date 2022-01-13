@@ -4,6 +4,7 @@ import org.apache.ibatis.builder.xml.XMLMapperEntityResolver;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.InputSource;
 
@@ -11,6 +12,7 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +36,23 @@ public class SqlSessionFactoryBuilder {
 
     private Configuration parseConfiguration(Element root) {
         Configuration configuration = new Configuration();
-        configuration.setDataSource(dataSource(root.selectNodes("//dataSource")));
+        List<Node> selectDataSources = root.selectNodes("//dataSource");
+        List<Element> elements = new ArrayList<>(selectDataSources.size());
+        selectDataSources.forEach(item->{
+            Element element = (Element) item;
+            elements.add(element);
+        });
+
+        configuration.setDataSource(dataSource(elements));
         configuration.setConnection(connection(configuration.dataSource));
-        configuration.setMapperElement(mapperElement(root.selectNodes("mappers")));
+        List<Node> selectMappers = root.selectNodes("mappers");
+        List<Element> elementMappers = new ArrayList<>(selectMappers.size());
+        selectMappers.forEach(item->{
+            Element element = (Element) item;
+            elementMappers.add(element);
+        });
+
+        configuration.setMapperElement(mapperElement(elementMappers));
         return configuration;
     }
 
@@ -84,12 +100,14 @@ public class SqlSessionFactoryBuilder {
                 String namespace = root.attributeValue("namespace");
 
                 // SELECT
-                List<Element> selectNodes = root.selectNodes("select");
-                for (Element node : selectNodes) {
-                    String id = node.attributeValue("id");
-                    String parameterType = node.attributeValue("parameterType");
-                    String resultType = node.attributeValue("resultType");
-                    String sql = node.getText();
+                List<Node> nodes = root.selectNodes("select");
+
+                for (Node node : nodes) {
+                    Element nodeElement = (Element) node;
+                    String id = nodeElement.attributeValue("id");
+                    String parameterType = nodeElement.attributeValue("parameterType");
+                    String resultType = nodeElement.attributeValue("resultType");
+                    String sql = nodeElement.getText();
 
                     // ? 匹配
                     Map<Integer, String> parameter = new HashMap<>();
