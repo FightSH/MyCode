@@ -14,10 +14,12 @@ public class SwapPairs24 {
             other = temp;
         }
         root.print();
-        swapPairs(other).print();
+        ListNode listNode = swapPairs(root);
+        listNode.print();
     }
 
     public static ListNode swapPairs(ListNode head) {
+
         ListNode dumpy = new ListNode();
         dumpy.next = head;
         ListNode cur = dumpy;
@@ -30,11 +32,6 @@ public class SwapPairs24 {
             cur.next = cur.next.next;
             cur.next.next = a;
             cur.next.next.next = b;
-
-//            a.next = b.next;
-//            cur.next = b;
-//            b.next = a;
-
 
             cur = cur.next.next;
 
