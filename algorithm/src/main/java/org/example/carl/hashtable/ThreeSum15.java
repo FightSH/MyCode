@@ -55,7 +55,7 @@ public class ThreeSum15 {
     }
 
     /**
-     * 双指针法
+     * 双指针法 核心思路是 一层 for 循环 nums[i] 确定值，循环内有left和right下标作为双指针，找到nums[i] + nums[left] + nums[right] == 0
      *
      * @param nums
      * @return
@@ -66,6 +66,8 @@ public class ThreeSum15 {
         Arrays.sort(nums);
 
         for (int i = 0; i < nums.length; i++) {
+
+            // 如果排序后的第一个元素就已经大于0，那么不可能凑出三元组
             if (nums[i] > 0) {
                 return result;
             }
