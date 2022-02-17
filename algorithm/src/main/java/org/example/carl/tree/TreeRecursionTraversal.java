@@ -11,7 +11,7 @@ import java.util.List;
  * 2. 确定终止条件
  * 3. 确定单层递归的逻辑
  */
-public class TreeTraversal {
+public class TreeRecursionTraversal {
 
     // 前序遍历 中左右
     public static void preOrder(TreeNode node, List<Integer> list) {
@@ -20,10 +20,8 @@ public class TreeTraversal {
             return;
         }
         list.add(node.val);
-        System.out.println(node.val);
         preOrder(node.left, list);
         preOrder(node.right, list);
-
     }
 
     // 中序遍历 左中右
@@ -34,9 +32,7 @@ public class TreeTraversal {
         }
         inOrder(node.left, list);
         list.add(node.val);
-        System.out.println(node.val);
         inOrder(node.right, list);
-
     }
 
     // 后序遍历 左右中
@@ -45,12 +41,9 @@ public class TreeTraversal {
         if (node == null) {
             return;
         }
-
         postOrder(node.left, list);
         postOrder(node.right, list);
         list.add(node.val);
-        System.out.println(node.val);
-
     }
 
 
