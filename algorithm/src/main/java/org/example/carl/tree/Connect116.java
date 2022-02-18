@@ -1,8 +1,34 @@
 package org.example.carl.tree;
 
+import java.util.LinkedList;
+
 public class Connect116 {
 
     public static Node connect(Node root) {
+        if (root == null) {
+            return null;
+        }
+        LinkedList<Node> deque = new LinkedList<>();
+
+        deque.offer(root);
+
+        while (!deque.isEmpty()) {
+            int len = deque.size();
+
+            for (int i = len; i > 0; i--) {
+                Node node = deque.poll();
+                if (node.left != null) {
+                    deque.offer(node.left);
+                }
+                if (node.right != null) {
+                    deque.offer(node.right);
+                }
+
+                if (i != 1) {
+                    node.next = deque.peek();
+                }
+            }
+        }
 
         return root;
     }
