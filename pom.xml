@@ -16,6 +16,7 @@
         <module>utils</module>
         <module>encrypt</module>
         <module>function</module>
+        <module>scaladaemo</module>
     </modules>
 
     <build>
