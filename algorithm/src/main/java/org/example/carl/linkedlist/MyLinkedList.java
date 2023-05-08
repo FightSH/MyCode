@@ -13,80 +13,70 @@ void deleteAtIndex(int index) 如果下标有效，则删除链表中下标为 i
 */
 class MyLinkedList {
 
-    int val;
-    MyLinkedList next;
-    int size = 0;
+    int size;
 
-    public MyLinkedList() {
+    ListNode head;
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 
-    public MyLinkedList(int val, MyLinkedList next) {
-        this.val = val;
-        this.next = next;
+
+    public MyLinkedList() {
+        int size = 0;
+        this.head = new ListNode(-1, null);
     }
 
     public int get(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             return -1;
         }
-        MyLinkedList cur = this;
-        while (index > 0) {
-            cur = cur.next;
-            index--;
+        ListNode pre = head;
+        while (index-- > 0) {
+            pre = pre.next;
         }
-        return cur.val;
+        return pre.next.val;
     }
 
     public void addAtHead(int val) {
-        MyLinkedList oldHead = new MyLinkedList(this.val, next);
-        this.val = val;
-        this.next = oldHead;
-        size++;
+        addAtIndex(0, val);
     }
 
     public void addAtTail(int val) {
-        MyLinkedList cur = this;
-        for (int i1 = 0; i1 < size - 1; i1++) {
-
-            cur = cur.next;
-        }
-        cur.next = new MyLinkedList(val, null);
-        size++;
+        addAtIndex(size, val);
     }
 
     public void addAtIndex(int index, int val) {
-        if (index == 0) {
-            addAtHead(val);
-        } else {
-            MyLinkedList pre = new MyLinkedList(-1, this);
-            MyLinkedList cur = this;
-
-            for (int i1 = 0; i1 < index; i1++) {
-                pre = pre.next;
-                cur = cur.next;
-            }
-            pre.next = new MyLinkedList(val, cur);
-
-            size++;
+        if (index > size) {
+            return;
         }
+        ListNode pre = head;
+        ListNode cur = head.next;
+        while (index-- > 0) {
+            pre = pre.next;
+            cur = cur.next;
+        }
+        pre.next = new ListNode(val, cur);
 
-
+        size++;
     }
 
     public void deleteAtIndex(int index) {
-        if (index == 0) {
-            this.val = next.val;
-            this.next = next.next;
-        }else {
-            MyLinkedList pre = new MyLinkedList(-1, this);
-            MyLinkedList cur = this;
-            for (int i1 = 0; i1 < index - 1; i1++) {
-                pre = pre.next;
-                cur = cur.next;
-            }
-            pre.next = cur.next;
-
+        if (index >= size) {
+            return;
         }
+
+        ListNode pre = head;
+        while (index-- > 0) {
+            pre = pre.next;
+        }
+        pre.next = pre.next.next;
         size--;
     }
 
@@ -96,12 +86,12 @@ class MyLinkedList {
 
 //        ["MyLinkedList","addAtHead","addAtTail","addAtIndex","get","deleteAtIndex","get"]
 //        [[],[1],[3],[1,2],[1],[0],[0]]
-        myLinkedList.addAtHead(1);
-        myLinkedList.addAtTail(3);
-        myLinkedList.addAtIndex(1, 2);
-        System.out.println(myLinkedList.get(1));
-        myLinkedList.deleteAtIndex(0);
-        System.out.println(myLinkedList.get(0));
+//        myLinkedList.addAtHead(1);
+//        myLinkedList.addAtTail(3);
+//        myLinkedList.addAtIndex(1, 2);
+//        System.out.println(myLinkedList.get(1));
+//        myLinkedList.deleteAtIndex(0);
+//        System.out.println(myLinkedList.get(0));
 
 //        ["MyLinkedList","addAtHead","addAtTail","addAtIndex","get","deleteAtIndex","get"]
 //        [[],[1],[3],[1,2],[1],[1],[1]]
@@ -127,5 +117,38 @@ class MyLinkedList {
 //        myLinkedList.addAtHead(4);
 //        myLinkedList.addAtIndex(5, 0);
 //        myLinkedList.addAtHead(6);
+
+//        ["MyLinkedList","addAtHead","deleteAtIndex","addAtHead","addAtHead","addAtHead","addAtHead","addAtHead","addAtTail","get","deleteAtIndex","deleteAtIndex"]
+//        [[],            [2],            [1],        [2],        [7],            [3],        [2],        [5],        [5],    [5],    [6],            [4]]
+
+//        myLinkedList.addAtHead(4);
+//
+//        myLinkedList.addAtHead(2);
+//        myLinkedList.addAtHead(7);
+//        myLinkedList.addAtHead(3);
+//        myLinkedList.addAtHead(2);
+//        myLinkedList.addAtTail(5);
+//        System.out.println(myLinkedList.get(5));
+//        myLinkedList.deleteAtIndex(6);
+//        myLinkedList.deleteAtIndex(4);
+//        System.out.println(myLinkedList.get(0));
+
+
+//        ["MyLinkedList","addAtHead","get","addAtHead","addAtHead","deleteAtIndex","addAtHead","get","get","get","addAtHead","deleteAtIndex"]
+//        [[],              [4],        [1],   [1],         [5],        [3],            [7],    [3],  [3],  [3],   [1],        [4]]
+        myLinkedList.addAtHead(4);
+        System.out.println(myLinkedList.get(1));
+        myLinkedList.addAtHead(1);
+        myLinkedList.addAtHead(5);
+        myLinkedList.deleteAtIndex(3);
+        myLinkedList.addAtHead(7);
+        System.out.println(myLinkedList.get(3));
+        System.out.println(myLinkedList.get(3));
+        System.out.println(myLinkedList.get(3));
+        myLinkedList.addAtHead(1);
+        myLinkedList.deleteAtIndex(4);
+
+
+
     }
 }
