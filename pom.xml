@@ -17,6 +17,7 @@
         <module>encrypt</module>
         <module>function</module>
         <module>scaladaemo</module>
+        <module>export-queue</module>
     </modules>
 
     <build>
