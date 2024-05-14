@@ -39,6 +39,12 @@ public class LockSupportDemo {
         /**
          * 定义调度线程
          */
+        Thread demo1 = new Thread(() -> {
+            int i;
+            synchronized (new Object()){
+
+            }
+        });
         Thread dispatch = new Thread(() -> {
             int i=0;
             try {
